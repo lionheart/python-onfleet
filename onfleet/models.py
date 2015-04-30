@@ -92,7 +92,10 @@ class Task(object):
     ACTIVE = 2
     COMPLETED = 3
 
-    def __init__(self, destination, recipients, notes=None, state=None, id=None, created_on=None, updated_on=None, merchant=None, executor=None):
+    def __init__(self, destination, recipients, notes=None, state=None,
+            id=None, created_on=None, updated_on=None, merchant=None,
+            executor=None, pickup_task=False, complete_after=None,
+            complete_before=None):
         self.id = id
         self.created_on = created_on
         self.updated_on = updated_on
@@ -101,6 +104,9 @@ class Task(object):
         self.destination = destination
         self.recipients = recipients
         self.notes = notes
+        self.pickup_task = pickup_task
+        self.complete_after = complete_after
+        self.complete_before = complete_before
 
     def __repr__(self):
         return "<Task id='{}'>".format(self.id)

@@ -1,6 +1,8 @@
 import json
 import requests
 import models
+import utils
+
 
 ONFLEET_API_ENDPOINT = "https://onfleet.com/api/v2/"
 
@@ -67,6 +69,9 @@ class ComplexEncoder(json.JSONEncoder):
                 'destination': obj.destination,
                 'recipients': obj.recipients,
                 'notes': obj.notes,
+                'pickupTask': obj.pickup_task,
+                'completeAfter': utils.unix_time(obj.complete_after),
+                'completeBefore': utils.unix_time(obj.complete_before),
             }
 
             optional_properties = {}
