@@ -16,8 +16,12 @@ except ImportError:
 
     utc = UTC()
 
-def unix_time(dt):
+def to_unix_time(dt):
     epoch = datetime.datetime.fromtimestamp(0, tz=utc)
     delta = dt - epoch
     # Return milliseconds
     return delta.total_seconds() * 1000.0
+
+
+def from_unix_time(milliseconds):
+    return datetime.datetime.fromtimestamp(milliseconds / 1000.0, tz=utc)

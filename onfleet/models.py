@@ -1,3 +1,4 @@
+import utils
 
 class Organization(object):
     def __init__(self, id=None, created_on=None, updated_on=None, name=None, email=None, timezone=None, country=None, delegatee_ids=None, image=None):
@@ -120,8 +121,16 @@ class Task(object):
             state=obj['state'],
             notes=obj['notes'],
             destination=Destination.parse(obj['destination']),
-            recipients=map(Recipient.parse, obj['recipients'])
+            recipients=map(Recipient.parse, obj['recipients']),
+            pickup_task=obj['pickupTask'],
+            complete_after=obj['completeAfter'],
+            complete_before=obj['completeBefore'],
         )
+        if obj['completeAfter']:
+            task.complete_after = utils.from_unix_time(obj['completeAfter'])
+
+        if obj['completeBefore']:
+            task.complete_before = utils.from_unix_time(obj['completeBefore'])
 
         if 'worker' in obj and obj['worker'] is not None:
             task.worker = Worker.parse(obj['worker'])
