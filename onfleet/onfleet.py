@@ -3,6 +3,7 @@ import json
 import requests
 import models
 import utils
+from .exceptions import OnfleetException, OnfleetDuplicateKeyException
 
 
 ONFLEET_API_ENDPOINT = "https://onfleet.com/api/v2/"
@@ -162,22 +163,24 @@ class OnfleetCall(object):
             if component in self.components:
                 parse_as = parser
 
-        json_response = response.json()
+        if method.lower() != 'delete':
+            json_response = response.json()
 
-        if 'code' in json_response:
-            message = json_response['message']
+            if 'code' in json_response:
+                message = json_response['message']
+                cause = message.get('cause', '')
 
-            if 'cause' in message:
-                cause = message['cause']
-                if cause['type'] == 'duplicateKey':
+                if isinstance(cause, dict) and cause['type'] == 'duplicateKey':
                     raise OnfleetDuplicateKeyException("{}: {} (value: '{}', key: '{}')" \
-                            .format(message['error'], message['message'], cause['value'], cause['key']))
+                        .format(message['error'], message['message'], cause['value'], cause['key']))
+                raise OnfleetException("{}: {} ({})" \
+                    .format(message['error'], message['message'], cause))
 
-        if parse_response and parse_as is not None:
-            if isinstance(json_response, list):
-                return map(parse_as.parse, json_response)
+            if parse_response and parse_as is not None:
+                if isinstance(json_response, list):
+                    return map(parse_as.parse, json_response)
+                else:
+                    return parse_as.parse(json_response)
             else:
-                return parse_as.parse(json_response)
-        else:
-            return json_response
-
+                return json_response
+        return None
