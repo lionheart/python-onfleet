@@ -95,8 +95,8 @@ class Task(object):
 
     def __init__(self, destination, recipients, notes=None, state=None,
             id=None, created_on=None, updated_on=None, merchant=None,
-            executor=None, pickup_task=False, complete_after=None,
-            complete_before=None):
+            executor=None, pickup_task=False, tracking_url=None,
+            complete_after=None, complete_before=None):
         self.id = id
         self.created_on = created_on
         self.updated_on = updated_on
@@ -106,6 +106,7 @@ class Task(object):
         self.recipients = recipients
         self.notes = notes
         self.pickup_task = pickup_task
+        self.tracking_url = tracking_url
         self.complete_after = complete_after
         self.complete_before = complete_before
 
@@ -123,6 +124,7 @@ class Task(object):
             destination=Destination.parse(obj['destination']),
             recipients=map(Recipient.parse, obj['recipients']),
             pickup_task=obj['pickupTask'],
+            tracking_url=obj['trackingURL'],
             complete_after=obj['completeAfter'],
             complete_before=obj['completeBefore'],
         )
