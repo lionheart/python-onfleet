@@ -133,7 +133,7 @@ class Task(object):
             task.complete_before = utils.from_unix_time(obj['completeBefore'])
 
         if 'worker' in obj and obj['worker'] is not None:
-            task.worker = Worker.parse(obj['worker'])
+            task.worker = obj['worker']
 
         return task
 
