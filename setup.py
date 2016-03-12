@@ -58,7 +58,7 @@ setup(
     classifiers=classifiers,
     cmdclass={'test': TestCommand},
     description="A Python wrapper for Onfleet",
-    install_required=["requests"],
+    install_required=["requests", "future"],
     keywords="onfleet",
     license=metadata.__license__,
     long_description=long_description,
