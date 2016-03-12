@@ -23,7 +23,7 @@ python-onfleet is available for download through the Python Package Index (PyPi)
 
    pip install onfleet
 
-No dependencies (besides Python 2.7).
+No dependencies (besides Python >= 2.7).
 
 Usage
 -----
