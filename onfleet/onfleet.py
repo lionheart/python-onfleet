@@ -1,8 +1,11 @@
+from __future__ import absolute_import
+from builtins import map
+from builtins import object
 import datetime
 import json
 import requests
-import models
-import utils
+from . import models
+from . import utils
 from .exceptions import OnfleetException, OnfleetDuplicateKeyException
 
 
@@ -98,7 +101,7 @@ class ComplexEncoder(json.JSONEncoder):
         if payload is None:
             return json.JSONEncoder.default(self, obj)
         else:
-            for key, value in optional_properties.iteritems():
+            for key, value in optional_properties.items():
                 if hasattr(obj, key) and getattr(obj, key) is not None:
                     if isinstance(getattr(obj, key), datetime.datetime):
                         payload[value] = utils.to_unix_time(getattr(obj, key))
@@ -160,7 +163,7 @@ class OnfleetCall(object):
         }
 
         parse_as = None
-        for component, parser in parse_dictionary.iteritems():
+        for component, parser in parse_dictionary.items():
             if component in self.components:
                 parse_as = parser
 
@@ -179,7 +182,7 @@ class OnfleetCall(object):
 
             if parse_response and parse_as is not None:
                 if isinstance(json_response, list):
-                    return map(parse_as.parse, json_response)
+                    return list(map(parse_as.parse, json_response))
                 else:
                     return parse_as.parse(json_response)
             else:

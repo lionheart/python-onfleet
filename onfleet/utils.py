@@ -1,3 +1,5 @@
+from __future__ import division
+from past.utils import old_div
 import datetime
 
 try:
@@ -24,4 +26,4 @@ def to_unix_time(dt):
 
 
 def from_unix_time(milliseconds):
-    return datetime.datetime.fromtimestamp(milliseconds / 1000.0, tz=utc)
+    return datetime.datetime.fromtimestamp(old_div(milliseconds, 1000.0), tz=utc)
