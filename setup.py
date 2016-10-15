@@ -1,9 +1,15 @@
 #!/usr/bin/env/python
 # -*- coding: utf-8 -*-
 
+__version__ = "0.0.1"
+__author__ = "Dan Loewenherz"
+__copyright__ = "Copyright 2015, Lionheart Software"
+__maintainer__ = "Dan Loewenherz"
+__email__ = "dan@lionheartsw.com"
+__license__ = "Apache 2.0"
+
 import unittest
 import os
-from onfleet import metadata
 from distutils.cmd import Command
 import re
 
@@ -53,18 +59,18 @@ class TestCommand(Command):
 
 
 setup(
-    author=metadata.__author__,
-    author_email=metadata.__email__,
+    author=__author__,
+    author_email=__email__,
     classifiers=classifiers,
     cmdclass={'test': TestCommand},
     description="A Python wrapper for Onfleet",
-    install_required=["requests"],
+    install_requires=["requests", "future"],
     keywords="onfleet",
-    license=metadata.__license__,
+    license=__license__,
     long_description=long_description,
     name='onfleet',
     package_data={'': ['LICENSE', 'README.rst']},
     packages=['onfleet'],
     url="http://github.com/lionheart/python-onfleet",
-    version=metadata.__version__,
+    version=__version__,
 )

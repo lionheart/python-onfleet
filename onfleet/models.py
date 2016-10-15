@@ -1,4 +1,7 @@
-import utils
+from __future__ import absolute_import
+from builtins import map
+from builtins import object
+from . import utils
 
 class Organization(object):
     def __init__(self, id=None, created_on=None, updated_on=None, name=None, email=None, timezone=None, country=None, delegatee_ids=None, image=None):
@@ -123,7 +126,7 @@ class Task(object):
             state=obj['state'],
             notes=obj['notes'],
             destination=Destination.parse(obj['destination']),
-            recipients=map(Recipient.parse, obj['recipients']),
+            recipients=list(map(Recipient.parse, obj['recipients'])),
             pickup_task=obj['pickupTask'],
             tracking_url=obj['trackingURL'],
             complete_after=obj['completeAfter'],
