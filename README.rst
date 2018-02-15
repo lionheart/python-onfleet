@@ -1,13 +1,10 @@
 Python-Onfleet
 ==============
 
-|ci|_   |version|_   |downloads|_
+|ci|_   |version|_
 
 .. |ci| image:: https://img.shields.io/travis/lionheart/python-onfleet.svg?style=flat
 .. _ci: https://travis-ci.org/lionheart/onfleet.py
-
-.. |downloads| image:: https://img.shields.io/pypi/dm/onfleet.svg?style=flat
-.. _downloads: https://pypi.python.org/pypi/onfleet
 
 .. |version| image:: https://img.shields.io/pypi/v/onfleet.svg?style=flat
 .. _version: https://pypi.python.org/pypi/onfleet
