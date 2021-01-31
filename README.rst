@@ -1,3 +1,9 @@
+UPDATE: Please use Onfleet's wrapper instead. This repository is not maintained.
+
+https://github.com/onfleet/pyonfleet
+
+---
+
 Python-Onfleet
 ==============
 
